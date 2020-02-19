@@ -11,6 +11,20 @@ services:
     ports:
       - "98:80"
 
+  mariadb:
+    image: mariadb:10.1
+    container_name: alterapp-app-mariadb
+    working_dir: /application
+    volumes:
+      - .:/application
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+    ports:
+      - "3306:3306"
+
   php-fpm:
     build: phpdocker/php-fpm
     container_name: alterapp-php-fpm
@@ -21,6 +35,8 @@ services:
     environment:
       - APP_ENV=dev
       - APP_SECRET=123i1o23i1n$$klasdasnd
+      - DATABASE_URL=mysql://test:test@alterapp-app-mariadb:3306/test
+      - MAILER_URL=smtp://alterapp-mailhog:1025
 
   composer:
     restart: 'no'
@@ -29,3 +45,10 @@ services:
     command: install
     volumes:
       - .:/application
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: alterapp-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"

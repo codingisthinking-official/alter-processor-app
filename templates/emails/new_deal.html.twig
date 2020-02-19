@@ -1,0 +1,14 @@
+{% extends 'emails/base.html.twig'%}
+
+{% block body %}
+    Dziękujemy za zaufanie - wspólna inwestycja z Alter Investment S.A to z pewnością dobry wybór.<br><br>
+
+    Imię: {{ deal.firstName }}<br>
+    Nazwisko: {{ deal.lastName }}<br>
+    Adres: {{ deal.address }}, {{ deal.city }} {{ deal.postcode }}<br><br>
+
+    Właściwy urząd skarbowy: {{ deal.government }}<br>
+    Numer rachunku do wypłaty odsetek i zwrotu wpłaconej kwoty: {{ deal.accountNumber }}<br><br>
+
+    <strong>Deklarowana kwota wpłaty</strong>: {{ deal.amount|number_format(2, ',', '.') }} zł<br>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'emails/base.html.twig'%}
+
+{% block body %}
+    Imię: {{ form.name }}<br>
+    E-mail: {{ form.email }}<br><br>
+
+    {{ form.body }}
+{% endblock %}
